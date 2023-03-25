@@ -1,10 +1,11 @@
 import { LoadingOutlined } from '@ant-design/icons';
 import { Route, Routes } from 'react-router-dom';
 import { useAuthContext } from './features/auth/context/AuthContext';
+import { AppLayout } from './features/layout/Layout';
 import { useUserContext } from './features/user/context/UserContext';
-import { Page403 } from './pages/403/403';
-import { Auth } from './pages/Auth/Auth';
-import { Home } from './pages/Home/Home';
+import { Page403 } from './pages/403';
+import { Auth } from './pages/Auth';
+import { Profile } from './pages/Profile';
 
 export const Router = () => {
   const { loggedIn, isLoading } = useAuthContext();
@@ -30,8 +31,27 @@ export const Router = () => {
 
   return (
     <Routes>
-      {loggedIn && <Route path="/" element={<Home />} />}
-      {loggedIn && <Route path="*" element={<p>404</p>} />}
+      <Route path="/" element={<AppLayout />}>
+        <Route
+          path="/"
+          element={<div className="screen-center">Dashboard</div>}
+        />
+        <Route
+          path="/users"
+          element={<div className="screen-center">Users</div>}
+        />
+        <Route
+          path="/submissions"
+          element={<div className="screen-center">Submissions</div>}
+        />
+        <Route
+          path="/recipes"
+          element={<div className="screen-center">Recipes</div>}
+        />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/settings" element={<div>Settings</div>} />
+        <Route path="*" element={<p className="screen-center">404</p>} />
+      </Route>
     </Routes>
   );
 };
