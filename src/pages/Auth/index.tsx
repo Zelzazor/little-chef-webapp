@@ -14,7 +14,9 @@ const LoginButton = () => {
 export const Auth = () => {
   return (
     <>
-      <div className="screen-center">
+      <div className="screen-center flex-col">
+        <img className="w-16 mb-4" src="/logo.png" alt="Little Chef" />
+        <h1>Little Chef (Back Office)</h1>
         <LoginButton />
       </div>
     </>
