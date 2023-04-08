@@ -9,8 +9,8 @@ import {
 import { Dropdown, Layout, Menu, MenuProps } from 'antd';
 import { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { LogoutButton } from '../auth/components/LogoutButton';
 import { useUserContext } from '../user/context/UserContext';
-import { LogoutButton } from '../utility/components/LogoutButton';
 
 const { Header, Sider, Content } = Layout;
 

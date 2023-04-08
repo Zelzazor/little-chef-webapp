@@ -1,4 +1,4 @@
-import { LogoutButton } from '../../features/utility/components/LogoutButton';
+import { LogoutButton } from '../../features/auth/components/LogoutButton';
 
 export const Page403 = () => {
   return (
