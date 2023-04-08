@@ -6,7 +6,7 @@ import { useUserContext } from './features/user/context/UserContext';
 import { Page403 } from './pages/403';
 import { Auth } from './pages/Auth';
 import { Profile } from './pages/Profile';
-import { Submissions } from './pages/Submissions/Submissions';
+import { Submissions } from './pages/Submissions';
 
 export const Router = () => {
   const { loggedIn, isLoading } = useAuthContext();
