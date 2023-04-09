@@ -41,14 +41,7 @@ export const Router = () => {
           path="/users"
           element={<div className="screen-center">Users</div>}
         />
-        <Route
-          path="/submissions"
-          element={
-            <div className="screen-center">
-              <Submissions />
-            </div>
-          }
-        />
+        <Route path="/submissions" element={<Submissions />} />
         <Route
           path="/recipes"
           element={<div className="screen-center">Recipes</div>}
