@@ -46,7 +46,7 @@ export const AppLayout = () => {
   };
 
   return (
-    <Layout className="min-h-screen">
+    <Layout className="h-screen">
       <Sider
         breakpoint="md"
         className="sticky"
@@ -113,7 +113,7 @@ export const AppLayout = () => {
             </div>
           </Dropdown>
         </Header>
-        <Content className="p-3 overflow-y-auto">
+        <Content className="p-3 h-full overflow-y-auto">
           <Outlet />
         </Content>
       </Layout>
