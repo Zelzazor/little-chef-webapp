@@ -91,7 +91,7 @@ export const AppLayout = () => {
         />
       </Sider>
       <Layout>
-        <Header className="bg-white pl-5 pr-5 flex items-center justify-between sticky">
+        <Header className="bg-white pl-5 pr-5 flex items-center justify-between sticky border-0 border-b-[1px] border-solid border-b-gray-200">
           {collapsed ? (
             <MenuUnfoldOutlined
               className="trigger"
