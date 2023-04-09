@@ -1,6 +1,8 @@
 import { DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import confirm from 'antd/es/modal/confirm';
+import { Modal } from 'antd';
+
 import { FC } from 'react';
+import { useSubmissions } from '../../hooks/useSubmissions';
 import { Submission } from '../../types/submission';
 
 interface DeleteSubmissionButtonProps {
@@ -10,14 +12,25 @@ interface DeleteSubmissionButtonProps {
 
 export const DeleteSubmissionButton: FC<DeleteSubmissionButtonProps> = ({
   className,
+  submission,
 }) => {
+  const { useDeleteSubmission } = useSubmissions();
+  const { mutate: deleteSubmission } = useDeleteSubmission({
+    submissionId: submission.id,
+  });
+
+  const { confirm } = Modal;
+
   const confirmDelete = () => {
     return confirm({
       title: 'Are you sure you want to delete this submission?',
-      icon: <ExclamationCircleOutlined className="text-red-600" />,
+      icon: <ExclamationCircleOutlined />,
       content: '',
-      onOk: () => console.log('deleted'),
+      onOk: () => deleteSubmission(),
       okText: 'Delete',
+      okType: 'danger',
+      cancelText: 'Cancel',
+      cancelButtonProps: {},
     });
   };
 
