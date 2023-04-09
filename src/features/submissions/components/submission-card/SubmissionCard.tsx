@@ -1,5 +1,6 @@
 import { Card } from 'antd';
 import { FC } from 'react';
+import NoImage from '../../../utility/assets/images/no-image.png';
 import { Submission } from '../../types/submission';
 
 interface SubmissionCardProps {
@@ -17,7 +18,11 @@ export const SubmissionCard: FC<SubmissionCardProps> = ({
       title={submission?.recipe?.name}
       hoverable
     >
-      <img className="w-full" src={submission.imageUrl} />
+      {submission.imageUrl ? (
+        <img className="w-full" src={submission.imageUrl} />
+      ) : (
+        <img className="w-full" src={NoImage} />
+      )}
     </Card>
   );
 };
