@@ -6,12 +6,12 @@ export const Submissions: FC = () => {
   return (
     <div>
       <div className="text-lg font-bold mb-4">Submissions</div>
-      <div className="flex flex-row flex-wrap">
+      <div className="flex flex-row flex-wrap gap-3 justify-center">
         {mockedSubmissions.map((submission) => {
           return (
             <SubmissionCard
               key={submission.id}
-              className="mb-3 mr-3"
+              className="w-[32%] min-w-[350px]"
               submission={submission}
             />
           );

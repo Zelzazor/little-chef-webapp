@@ -13,7 +13,7 @@ export const SubmissionCard: FC<SubmissionCardProps> = ({
 }) => {
   return (
     <Card
-      className={`w-[500px] h-fit ${className ?? ''}`}
+      className={`h-fit ${className ?? ''}`}
       title={submission?.recipe?.name}
       hoverable
     >
