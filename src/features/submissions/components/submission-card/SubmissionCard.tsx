@@ -18,11 +18,19 @@ export const SubmissionCard: FC<SubmissionCardProps> = ({
       title={submission?.recipe?.name}
       hoverable
     >
-      {submission.imageUrl ? (
-        <img className="w-full" src={submission.imageUrl} />
-      ) : (
-        <img className="w-full" src={NoImage} />
-      )}
+      <div className="flex flex-col">
+        {submission.imageUrl ? (
+          <img className="w-full" src={submission.imageUrl} />
+        ) : (
+          <img className="w-full" src={NoImage} />
+        )}
+        <div className="flex flex-row justify-between mt-3">
+          <div className="font-bold">Posted by {submission?.user?.name}</div>
+          <div className="font-bold">
+            {new Date(submission?.createdAt).toLocaleDateString()}
+          </div>
+        </div>
+      </div>
     </Card>
   );
 };
