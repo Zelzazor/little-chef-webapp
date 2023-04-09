@@ -4,12 +4,20 @@ import { Submission } from '../../types/submission';
 
 interface SubmissionCardProps {
   submission: Submission;
+  className?: string;
 }
 
-export const SubmissionCard: FC<SubmissionCardProps> = ({ submission }) => {
+export const SubmissionCard: FC<SubmissionCardProps> = ({
+  submission,
+  className,
+}) => {
   return (
-    <Card title={submission?.recipe?.name} hoverable>
-      <img src={submission.imageUrl} />
+    <Card
+      className={`w-[500px] ${className ?? ''}`}
+      title={submission?.recipe?.name}
+      hoverable
+    >
+      <img className="w-full" src={submission.imageUrl} />
     </Card>
   );
 };
