@@ -2,6 +2,7 @@ import { Card } from 'antd';
 import { FC } from 'react';
 import NoImage from '../../../utility/assets/images/no-image.png';
 import { Submission } from '../../types/submission';
+import { DeleteSubmissionButton } from '../delete-submission-button/DeleteSubmissionButton';
 
 interface SubmissionCardProps {
   submission: Submission;
@@ -17,6 +18,9 @@ export const SubmissionCard: FC<SubmissionCardProps> = ({
       className={`h-fit ${className ?? ''}`}
       title={submission?.recipe?.name}
       hoverable
+      extra={
+        <DeleteSubmissionButton className="text-lg" submission={submission} />
+      }
     >
       <div className="flex flex-col">
         {submission.imageUrl ? (
