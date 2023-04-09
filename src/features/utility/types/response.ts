@@ -1,6 +1,6 @@
 import { Pagination } from './pagination';
 
-export type PaginatedGetResponse<T> = {
-  data: T[];
+export type PaginatedResponse<T> = {
+  data: T;
   pagination: Pagination;
 };
