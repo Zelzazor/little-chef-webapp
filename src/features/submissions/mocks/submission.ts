@@ -3,7 +3,8 @@ import { Submission, SubmissionStatus } from '../types/submission';
 export const mockedSubmissions: Submission[] = [
   {
     id: '1a918639-ebf2-436a-a7ae-2f4f758c9952',
-    imageUrl: 'https://thumbs.dreamstime.com/b/pan-largo-del-pan-22826883.jpg',
+    imageUrl:
+      'https://eldiariony.com/wp-content/uploads/sites/2/2022/09/Queso-fresco-shutterstock_1842968164.jpg?quality=75&strip=all&w=1200&h=800&crop=1',
     status: SubmissionStatus.PENDING,
     userId: '4b3f4191-b075-4124-aacb-b187eecf5c3e',
     recipeId: '61e2266c-dcf6-4a2a-8776-68c93b306c22',
@@ -157,7 +158,8 @@ export const mockedSubmissions: Submission[] = [
   },
   {
     id: '89946995-7392-4bd4-9ed0-8dabe5eb864e',
-    imageUrl: 'https://thumbs.dreamstime.com/b/pan-largo-del-pan-22826883.jpg',
+    imageUrl:
+      'https://twoplaidaprons.com/wp-content/uploads/2022/12/ratatouille-baked-in-copper-pan-thumbnail.jpg',
     status: SubmissionStatus.PENDING,
     userId: '4b3f4191-b075-4124-aacb-b187eecf5c3e',
     recipeId: '61e2266c-dcf6-4a2a-8776-68c93b306c22',
@@ -199,7 +201,8 @@ export const mockedSubmissions: Submission[] = [
   },
   {
     id: 'dc9fc192-732f-4251-a678-a22a68bd8233',
-    imageUrl: 'https://thumbs.dreamstime.com/b/pan-largo-del-pan-22826883.jpg',
+    imageUrl:
+      'https://eldiariony.com/wp-content/uploads/sites/2/2022/09/Queso-fresco-shutterstock_1842968164.jpg?quality=75&strip=all&w=1200&h=800&crop=1',
     status: SubmissionStatus.PENDING,
     userId: '4b3f4191-b075-4124-aacb-b187eecf5c3e',
     recipeId: '61e2266c-dcf6-4a2a-8776-68c93b306c22',
@@ -220,7 +223,8 @@ export const mockedSubmissions: Submission[] = [
   },
   {
     id: 'e8cb51f8-7335-4e85-9473-3aa480fe6010',
-    imageUrl: 'https://thumbs.dreamstime.com/b/pan-largo-del-pan-22826883.jpg',
+    imageUrl:
+      'https://twoplaidaprons.com/wp-content/uploads/2022/12/ratatouille-baked-in-copper-pan-thumbnail.jpg',
     status: SubmissionStatus.APPROVED,
     userId: '4b3f4191-b075-4124-aacb-b187eecf5c3e',
     recipeId: '61e2266c-dcf6-4a2a-8776-68c93b306c22',
