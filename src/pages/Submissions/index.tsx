@@ -13,7 +13,7 @@ export const Submissions: FC = () => {
 
   return (
     <div className="flex flex-col">
-      <div className="text-lg font-bold mb-4">Submissions</div>
+      <div className="text-3xl font-bold mb-4 text-center">Submissions</div>
       <div className="flex flex-row flex-wrap gap-3 justify-center mb-3">
         {data?.submissions.map((submission) => {
           return (
