@@ -4,3 +4,5 @@ export type Pagination = {
   totalItems: number;
   totalPages: number;
 };
+
+export type PaginationParams = Pick<Pagination, 'page' | 'pageSize'>;

@@ -1,11 +1,15 @@
 import { Pagination } from 'antd';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { SubmissionCard } from '../../features/submissions/components/submission-card/SubmissionCard';
 import { useSubmissions } from '../../features/submissions/hooks/useSubmissions';
+import { SubmissionFilters } from '../../features/submissions/types/get-submission';
 
 export const Submissions: FC = () => {
+  const [submissionFilters, setSubmissionFilters] = useState<SubmissionFilters>(
+    { page: 1, pageSize: 12 },
+  );
   const { useGetSubmissions } = useSubmissions();
-  const { data } = useGetSubmissions();
+  const { data } = useGetSubmissions(submissionFilters);
 
   return (
     <div className="flex flex-col">
@@ -25,8 +29,13 @@ export const Submissions: FC = () => {
         className="mx-auto"
         defaultPageSize={12}
         pageSizeOptions={[12, 24, 48]}
-        defaultCurrent={1}
-        total={1000}
+        pageSize={submissionFilters.pageSize}
+        showSizeChanger
+        defaultCurrent={submissionFilters.page}
+        total={data?.pagination.totalItems}
+        onChange={(page, pageSize) => {
+          setSubmissionFilters({ ...submissionFilters, page, pageSize });
+        }}
       />
     </div>
   );
