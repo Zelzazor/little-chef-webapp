@@ -16,7 +16,14 @@ export const SubmissionCard: FC<SubmissionCardProps> = ({
   return (
     <Card
       className={`h-fit ${className ?? ''}`}
-      title={submission?.recipe?.name}
+      title={
+        <div>
+          <div>{submission?.recipe?.name}</div>
+          <div className="font-bold text-xs">
+            Posted by {submission?.user?.name}
+          </div>
+        </div>
+      }
       hoverable
       extra={
         <DeleteSubmissionButton className="text-lg" submission={submission} />
@@ -28,8 +35,7 @@ export const SubmissionCard: FC<SubmissionCardProps> = ({
         ) : (
           <img className="w-full" src={NoImage} />
         )}
-        <div className="flex flex-row justify-between mt-3">
-          <div className="font-bold">Posted by {submission?.user?.name}</div>
+        <div className="flex flex-row justify-between mt-3 ml-auto">
           <div className="font-bold">
             {new Date(submission?.createdAt).toLocaleDateString()}
           </div>
