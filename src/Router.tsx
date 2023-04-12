@@ -6,6 +6,7 @@ import { useUserContext } from './features/user/context/UserContext';
 import { Page403 } from './pages/403';
 import { Auth } from './pages/Auth';
 import { Profile } from './pages/Profile';
+import { Submissions } from './pages/Submissions';
 
 export const Router = () => {
   const { loggedIn, isLoading } = useAuthContext();
@@ -40,10 +41,7 @@ export const Router = () => {
           path="/users"
           element={<div className="screen-center">Users</div>}
         />
-        <Route
-          path="/submissions"
-          element={<div className="screen-center">Submissions</div>}
-        />
+        <Route path="/submissions" element={<Submissions />} />
         <Route
           path="/recipes"
           element={<div className="screen-center">Recipes</div>}

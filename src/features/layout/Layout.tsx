@@ -9,8 +9,8 @@ import {
 import { Dropdown, Layout, Menu, MenuProps } from 'antd';
 import { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { LogoutButton } from '../auth/components/LogoutButton';
 import { useUserContext } from '../user/context/UserContext';
-import { LogoutButton } from '../utility/components/LogoutButton';
 
 const { Header, Sider, Content } = Layout;
 
@@ -46,7 +46,7 @@ export const AppLayout = () => {
   };
 
   return (
-    <Layout className="min-h-screen">
+    <Layout className="h-screen">
       <Sider
         breakpoint="md"
         className="sticky"
@@ -91,7 +91,7 @@ export const AppLayout = () => {
         />
       </Sider>
       <Layout>
-        <Header className="bg-white pl-5 pr-5 flex items-center justify-between">
+        <Header className="bg-white pl-5 pr-5 flex items-center justify-between sticky border-0 border-b-[1px] border-solid border-b-gray-200">
           {collapsed ? (
             <MenuUnfoldOutlined
               className="trigger"
@@ -113,7 +113,7 @@ export const AppLayout = () => {
             </div>
           </Dropdown>
         </Header>
-        <Content className="p-3">
+        <Content className="p-3 h-full overflow-y-auto">
           <Outlet />
         </Content>
       </Layout>

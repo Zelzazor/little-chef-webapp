@@ -1,4 +1,4 @@
-import { User } from '@auth0/auth0-react';
+import { User as Auth0User } from '@auth0/auth0-react';
 
 export type Role = {
   id: string;
@@ -22,4 +22,4 @@ export type RegisteredUser = {
   Role: Role;
 };
 
-export type User = Omit<User, 'userId'> & RegisteredUser;
+export type User = Omit<Auth0User, 'userId'> & RegisteredUser;

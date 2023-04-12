@@ -15,10 +15,5 @@ export const useUser = () => {
       { enabled: false },
     );
 
-  const useTest = () =>
-    useQuery('test', async () => {
-      return await axios.get<GetUserResponse>(`${URL}/auth`);
-    });
-
-  return { useGetUser, useTest };
+  return { useGetUser };
 };
