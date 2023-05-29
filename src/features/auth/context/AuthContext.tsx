@@ -36,18 +36,18 @@ const AuthContextWrapper: FCC = ({ children }) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      getAccessTokenSilently({
-        authorizationParams: {
-          scope: 'openid profile email',
-          audience: import.meta.env.VITE_AUTH0_AUDIENCE,
-        },
-      }).then((token) => {
+    getAccessTokenSilently({
+      authorizationParams: {
+        scope: 'openid profile email',
+        audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+      },
+    })
+      .then((token) => {
         setAccessToken(token);
+      })
+      .catch((error) => {
+        setAccessToken(null);
       });
-    } else {
-      setAccessToken(null);
-    }
   }, [isAuthenticated, getAccessTokenSilently]);
 
   const login = useCallback(

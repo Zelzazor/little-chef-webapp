@@ -5,6 +5,7 @@ import { AppLayout } from './features/layout/Layout';
 import { useUserContext } from './features/user/context/UserContext';
 import { Page403 } from './pages/403';
 import { Auth } from './pages/Auth';
+import { Dashboard } from './pages/Dashboard';
 import { Profile } from './pages/Profile';
 import { Recipes } from './pages/Recipes';
 import { CreateRecipe } from './pages/Recipes/Create';
@@ -36,10 +37,7 @@ export const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<AppLayout />}>
-        <Route
-          path="/"
-          element={<div className="screen-center">Dashboard</div>}
-        />
+        <Route path="/" element={<Dashboard />} />
         <Route
           path="/users"
           element={<div className="screen-center">Users</div>}
