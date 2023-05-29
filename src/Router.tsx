@@ -7,6 +7,9 @@ import { Page403 } from './pages/403';
 import { Auth } from './pages/Auth';
 import { Dashboard } from './pages/Dashboard';
 import { Profile } from './pages/Profile';
+import { Recipes } from './pages/Recipes';
+import { CreateRecipe } from './pages/Recipes/Create';
+import { RecipeDetails } from './pages/Recipes/RecipeDetails';
 import { Submissions } from './pages/Submissions';
 
 export const Router = () => {
@@ -40,10 +43,11 @@ export const Router = () => {
           element={<div className="screen-center">Users</div>}
         />
         <Route path="/submissions" element={<Submissions />} />
-        <Route
-          path="/recipes"
-          element={<div className="screen-center">Recipes</div>}
-        />
+        <Route path="/recipes">
+          <Route path="" element={<Recipes />} />
+          <Route path="create" element={<CreateRecipe />} />
+          <Route path=":id" element={<RecipeDetails />} />
+        </Route>
         <Route path="/profile" element={<Profile />} />
         <Route path="/settings" element={<div>Settings</div>} />
         <Route path="*" element={<p className="screen-center">404</p>} />
