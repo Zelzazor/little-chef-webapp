@@ -1,3 +1,4 @@
+import { Recipe } from '../../recipes/types/recipe';
 import { User } from '../../user/types/user';
 import { BaseEntity } from '../../utility/types/entity';
 import { SubmissionVote } from './submission-vote';
@@ -8,7 +9,7 @@ export type Submission = BaseEntity & {
   userId: string;
   recipeId: string;
   user?: Partial<User>;
-  recipe?: Partial<any>;
+  recipe?: Partial<Recipe>;
   votes?: Partial<SubmissionVote>[];
 };
 

@@ -1,4 +1,4 @@
-import { Pagination } from 'antd';
+import { Pagination, Spin } from 'antd';
 import { FC, useState } from 'react';
 import { SubmissionCard } from '../../features/submissions/components/submission-card/SubmissionCard';
 import { useSubmissions } from '../../features/submissions/hooks/useSubmissions';
@@ -9,12 +9,13 @@ export const Submissions: FC = () => {
     { page: 1, pageSize: 12 },
   );
   const { useGetSubmissions } = useSubmissions();
-  const { data } = useGetSubmissions(submissionFilters);
+  const { data, isLoading } = useGetSubmissions(submissionFilters);
 
   return (
     <div className="flex flex-col">
       <div className="text-3xl font-bold mb-4 text-center">Submissions</div>
       <div className="flex flex-row flex-wrap gap-3 justify-center mb-3">
+        {isLoading && <Spin size="large" />}
         {data?.submissions.map((submission) => {
           return (
             <SubmissionCard

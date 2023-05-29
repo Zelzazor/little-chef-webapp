@@ -2,9 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+::before,
+::after {
+  border-width: 0;
+  border-style: solid;
+  border-color: theme('borderColor.DEFAULT', currentColor);
+}
+
 .screen-center {
   @apply flex items-center justify-center h-screen;
 }
+
+
 
 html {
   overflow: hidden;
