@@ -21,6 +21,7 @@ body {
 * {
   scrollbar-width: thin !important;
   scrollbar-color: #595959 #fafafa !important;
+  box-sizing: border-box;
 }
 
 /* General */
