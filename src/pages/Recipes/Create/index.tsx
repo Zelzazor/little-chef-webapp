@@ -2,13 +2,15 @@ import { FC, FormEvent, useEffect, useState } from 'react';
 
 import { PlusCircleOutlined } from '@ant-design/icons';
 import MDEditor from '@uiw/react-md-editor';
-import { Alert, Button, Input, Modal } from 'antd';
+import { Alert, Button, Input } from 'antd';
 import { useQueryClient } from 'react-query';
+import { CreateIngredientModal } from '../../../features/ingredients/components/create-ingredient-modal/CreateIngredientModal';
 import { IngredientList } from '../../../features/ingredients/components/ingredient-list/IngredientList';
 import { useIngredients } from '../../../features/ingredients/hooks/useIngredients';
 import { IngredientFilters } from '../../../features/ingredients/types/get-ingredients';
 import { Ingredient } from '../../../features/ingredients/types/ingredient';
 import { useRecipes } from '../../../features/recipes/hooks/useRecipes';
+import { CreateTagModal } from '../../../features/tags/components/create-tag-modal/CreateTagModal';
 import { TagList } from '../../../features/tags/components/tag-list/TagList';
 import { useTags } from '../../../features/tags/hooks/useTags';
 import { TagFilters } from '../../../features/tags/types/get-tags';
@@ -32,12 +34,14 @@ export const CreateRecipe: FC = () => {
   const [selectedTags, setSelectedTags] = useState<Partial<Tag>[]>([]);
   const { useCreateRecipe } = useRecipes();
   const { useGetIngredients, useCreateIngredient } = useIngredients();
-  const { useGetTags } = useTags();
+  const { useGetTags, useCreateTag } = useTags();
   const { data: tags } = useGetTags(tagFilters);
   const { data: ingredients } = useGetIngredients(ingredientFilters);
-  const [visible, setVisible] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [ingredientModalVisible, setIngredientModalVisible] = useState(false);
+  const [tagModalVisible, setTagModalVisible] = useState(false);
   const { mutate: createIngredient } = useCreateIngredient();
+  const { mutate: createTag } = useCreateTag();
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -58,7 +62,7 @@ export const CreateRecipe: FC = () => {
       behavior: 'smooth',
     });
 
-    setVisible(true);
+    setAlertVisible(true);
     setMarkdownValue('');
     setSelectedIngredients([]);
     setSelectedTags([]);
@@ -109,6 +113,21 @@ export const CreateRecipe: FC = () => {
     );
   };
 
+  const onSubmitTag = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const dataResults = new FormData(e.currentTarget);
+    const data = {
+      name: dataResults.get('tag_name'),
+    };
+
+    createTag(data, {
+      onSuccess: () => {
+        setTagModalVisible(false);
+        queryClient.invalidateQueries('tags');
+      },
+    });
+  };
+
   const onSubmitIngredient = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const dataResults = new FormData(e.currentTarget);
@@ -118,7 +137,7 @@ export const CreateRecipe: FC = () => {
 
     createIngredient(data, {
       onSuccess: () => {
-        setModalVisible(false);
+        setIngredientModalVisible(false);
         queryClient.invalidateQueries('ingredients');
       },
     });
@@ -149,12 +168,12 @@ export const CreateRecipe: FC = () => {
   return (
     <div className="flex flex-col mx-10 gap-2">
       <h1 className="text-3xl">Create new Recipe</h1>
-      {visible && (
+      {alertVisible && (
         <Alert
           message="Successfully created recipe"
           type="success"
           closable
-          onClose={() => setVisible(false)}
+          onClose={() => setAlertVisible(false)}
         />
       )}
       <form onSubmit={onSubmit} className="flex flex-col gap-2" id="submitForm">
@@ -181,7 +200,7 @@ export const CreateRecipe: FC = () => {
           removeIngredient={removeIngredient}
           ingredientFilters={ingredientFilters}
           setIngredientFilters={setIngredientFilters}
-          setModalVisible={setModalVisible}
+          setModalVisible={setIngredientModalVisible}
           pagination={
             ingredients?.pagination ?? {
               totalItems: 0,
@@ -198,6 +217,7 @@ export const CreateRecipe: FC = () => {
           removeTag={removeTag}
           tagFilters={tagFilters}
           setTagFilters={setTagFilters}
+          setModalVisible={setTagModalVisible}
           pagination={
             tags?.pagination ?? {
               totalItems: 0,
@@ -216,36 +236,16 @@ export const CreateRecipe: FC = () => {
           Create Recipe
         </Button>
       </form>
-      <Modal
-        title="Create Ingredient"
-        open={modalVisible}
-        onCancel={() => setModalVisible(false)}
-        closable
-        footer={null}
-      >
-        <form
-          onSubmit={onSubmitIngredient}
-          className="flex flex-col gap-2"
-          id="submitIngredientForm"
-        >
-          <label htmlFor="ingredient_name">Name</label>
-          <Input
-            placeholder="Name"
-            allowClear
-            required
-            name="ingredient_name"
-            id="ingredient_name"
-          />
-          <Button
-            type="primary"
-            block
-            icon={<PlusCircleOutlined />}
-            htmlType="submit"
-          >
-            Create Ingredient
-          </Button>
-        </form>
-      </Modal>
+      <CreateIngredientModal
+        ingredientModalVisible={ingredientModalVisible}
+        setIngredientModalVisible={setIngredientModalVisible}
+        onSubmitIngredient={onSubmitIngredient}
+      />
+      <CreateTagModal
+        tagModalVisible={tagModalVisible}
+        setTagModalVisible={setTagModalVisible}
+        onSubmitTag={onSubmitTag}
+      />
     </div>
   );
 };

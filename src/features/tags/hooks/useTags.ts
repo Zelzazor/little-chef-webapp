@@ -1,10 +1,20 @@
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { useAxios } from '../../utility/hooks/useAxios';
 import { GetTagsResponse, TagFilters } from '../types/get-tags';
 
 export const useTags = () => {
   const { axios } = useAxios();
   const URL = '/tags';
+
+  const useCreateTag = () => {
+    return useMutation({
+      mutationFn: async (form: { name: FormDataEntryValue | null }) => {
+        const response = await axios.post(`${URL}/create`, form);
+        const { data } = response;
+        return data;
+      },
+    });
+  };
 
   const useGetTags = (filters: TagFilters) =>
     useQuery(
@@ -24,5 +34,5 @@ export const useTags = () => {
       },
     );
 
-  return { useGetTags };
+  return { useGetTags, useCreateTag };
 };

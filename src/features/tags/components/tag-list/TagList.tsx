@@ -1,4 +1,4 @@
-import { Pagination } from 'antd';
+import { Button, Pagination } from 'antd';
 import Search from 'antd/es/input/Search';
 import { Pagination as PaginationResponse } from '../../../utility/types/pagination';
 import { TagFilters } from '../../types/get-tags';
@@ -13,6 +13,7 @@ interface TagListProps {
   addTag: (tag: Partial<Tag>) => void;
   removeTag: (id: string) => void;
   setTagFilters: (filters: TagFilters) => void;
+  setModalVisible: (visible: boolean) => void;
 }
 
 export const TagList = ({
@@ -22,6 +23,7 @@ export const TagList = ({
   removeTag,
   tagFilters,
   setTagFilters,
+  setModalVisible,
   pagination,
 }: TagListProps) => {
   return (
@@ -33,17 +35,28 @@ export const TagList = ({
           style={{ height: 500 }}
         >
           <div className="flex flex-col gap-2">
-            <Search
-              placeholder="Search by name"
-              allowClear
-              enterButton="Search"
-              size="large"
-              id="ingredientSearch"
-              form="searchForm"
-              onSearch={(value) => {
-                setTagFilters({ ...tagFilters, name: value });
-              }}
-            />
+            <div className="flex gap-2">
+              <Search
+                placeholder="Search by name"
+                allowClear
+                enterButton="Search"
+                size="large"
+                id="tagSearch"
+                form="searchForm"
+                onSearch={(value) => {
+                  setTagFilters({ ...tagFilters, name: value });
+                }}
+              />
+              <Button
+                type="primary"
+                size="large"
+                onClick={() => {
+                  setModalVisible(true);
+                }}
+              >
+                Add Tag
+              </Button>
+            </div>
             {tags.map((tag) => (
               <div
                 key={tag.id}
