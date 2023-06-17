@@ -11,6 +11,7 @@ import { Recipes } from './pages/Recipes';
 import { CreateRecipe } from './pages/Recipes/Create';
 import { RecipeDetails } from './pages/Recipes/RecipeDetails';
 import { Submissions } from './pages/Submissions';
+import { Users } from './pages/Users';
 
 export const Router = () => {
   const { loggedIn, isLoading } = useAuthContext();
@@ -38,10 +39,7 @@ export const Router = () => {
     <Routes>
       <Route path="/" element={<AppLayout />}>
         <Route path="/" element={<Dashboard />} />
-        <Route
-          path="/users"
-          element={<div className="screen-center">Users</div>}
-        />
+        <Route path="/users" element={<Users />} />
         <Route path="/submissions" element={<Submissions />} />
         <Route path="/recipes">
           <Route path="" element={<Recipes />} />
