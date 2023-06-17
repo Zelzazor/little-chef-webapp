@@ -9,7 +9,7 @@ import {
 import { Dropdown, Layout, Menu, MenuProps } from 'antd';
 import { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { LogoutButton } from '../auth/components/LogoutButton';
+import { LogoutButtonAnchor } from '../auth/components/LogoutButtonAnchor';
 import { useUserContext } from '../user/context/UserContext';
 
 const { Header, Sider, Content } = Layout;
@@ -33,7 +33,7 @@ export const AppLayout = () => {
     {
       key: '3',
       danger: true,
-      label: <LogoutButton />,
+      label: <LogoutButtonAnchor />,
     },
   ];
 
