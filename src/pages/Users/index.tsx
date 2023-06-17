@@ -11,8 +11,6 @@ export const Users: React.FC = () => {
   const { useGetAllUsers } = useUsers();
   const { data, isLoading } = useGetAllUsers(paginationQuery);
 
-  console.log(data?.data);
-
   if (isLoading) {
     return <div>Loading...</div>; // you can replace this with a spinner or a loading state
   }

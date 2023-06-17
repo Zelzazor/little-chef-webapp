@@ -39,7 +39,6 @@ export const UsersTable: React.FC<UsersTableProps> = ({
     },
     // add more columns as needed
   ];
-  console.log(users);
   return (
     <>
       <Table
@@ -47,9 +46,8 @@ export const UsersTable: React.FC<UsersTableProps> = ({
         dataSource={users}
         columns={columns}
         rowKey="id"
-      />{' '}
+      />
       <div className="w-full flex my-4">
-        {' '}
         <Pagination
           className="mx-auto"
           defaultPageSize={12}
