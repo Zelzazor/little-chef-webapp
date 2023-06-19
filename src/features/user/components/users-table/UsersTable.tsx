@@ -1,6 +1,4 @@
-// UsersTable.tsx
-
-import { Pagination, Table } from 'antd';
+import { Button, Pagination, Space, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { Pagination as PaginationResponse } from '../../../utility/types/pagination';
@@ -37,6 +35,27 @@ export const UsersTable: React.FC<UsersTableProps> = ({
       key: 'Role',
       render: (role) => role.name,
     },
+    {
+      title: 'Actions',
+      key: 'action',
+      render: () => (
+        <Space size="middle">
+          <Button
+            type="primary"
+            style={{
+              backgroundColor: 'Goldenrod',
+              borderColor: 'Goldenrod',
+              color: 'White',
+            }}
+          >
+            Warnings
+          </Button>
+          <Button type="primary" danger>
+            Ban
+          </Button>
+        </Space>
+      ),
+    },
     // add more columns as needed
   ];
   return (
@@ -51,7 +70,7 @@ export const UsersTable: React.FC<UsersTableProps> = ({
         <Pagination
           className="mx-auto"
           defaultPageSize={12}
-          pageSizeOptions={[12, 24, 48]}
+          pageSizeOptions={['12', '24', '48']}
           pageSize={paginationSettings.pageSize}
           showSizeChanger
           defaultCurrent={paginationSettings.page}
