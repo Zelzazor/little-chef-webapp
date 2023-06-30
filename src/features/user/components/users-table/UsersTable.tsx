@@ -1,7 +1,9 @@
+// UsersTable.tsx
 import { Button, Pagination, Space, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { Pagination as PaginationResponse } from '../../../utility/types/pagination';
+import { useUsers } from '../../hooks/useUsers';
 import { BasePaginationQueryDto } from '../../types/base-pagination-query.dto';
 import { User } from '../../types/user';
 
@@ -18,6 +20,10 @@ export const UsersTable: React.FC<UsersTableProps> = ({
   pagination,
   setPaginationSettings,
 }) => {
+  const { banUserMutation, unbanUserMutation } = useUsers();
+  const { mutate: banUser } = banUserMutation;
+  const { mutate: unbanUser } = unbanUserMutation;
+
   const columns: ColumnsType<User> = [
     {
       title: 'Name',
@@ -36,9 +42,24 @@ export const UsersTable: React.FC<UsersTableProps> = ({
       render: (role) => role.name,
     },
     {
+      title: 'Status',
+      dataIndex: 'bannedAt',
+      key: 'status',
+      render: (bannedAt: Date | null) => (
+        <span
+          style={{
+            color: bannedAt ? 'red' : 'green',
+            fontWeight: 'bold',
+          }}
+        >
+          {bannedAt ? 'Banned' : 'Active'}
+        </span>
+      ),
+    },
+    {
       title: 'Actions',
       key: 'action',
-      render: () => (
+      render: (user: User) => (
         <Space size="middle">
           <Button
             type="primary"
@@ -50,14 +71,20 @@ export const UsersTable: React.FC<UsersTableProps> = ({
           >
             Warnings
           </Button>
-          <Button type="primary" danger>
-            Ban
+          <Button
+            type="primary"
+            danger={!user.bannedAt}
+            onClick={() =>
+              user.bannedAt ? unbanUser(user.id) : banUser(user.id)
+            }
+          >
+            {user.bannedAt ? 'Unban' : 'Ban'}
           </Button>
         </Space>
       ),
     },
-    // add more columns as needed
   ];
+
   return (
     <>
       <Table
