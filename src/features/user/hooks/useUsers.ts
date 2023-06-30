@@ -1,12 +1,13 @@
 // useUsers.ts
 
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useAxios } from '../../utility/hooks/useAxios';
 import { BasePaginationQueryDto } from '../types/base-pagination-query.dto';
 import { GetAllUsersResponse } from '../types/get-all-users';
 
 export const useUsers = () => {
   const { axios } = useAxios();
+  const queryClient = useQueryClient(); // we use QueryClient for invalidating the cache
   const URL = '/user/all';
 
   const useGetAllUsers = (params: BasePaginationQueryDto) => {
@@ -19,5 +20,29 @@ export const useUsers = () => {
     );
   };
 
-  return { useGetAllUsers };
+  const useBanUserMutation = useMutation(
+    ['users'],
+    (id: string) => axios.post(`/user/ban/${id}`),
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries('users'); // invalidate all queries with the key 'users'
+      },
+    },
+  );
+
+  const useUnbanUserMutation = useMutation(
+    ['users'],
+    (id: string) => axios.post(`/user/unban/${id}`),
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries('users');
+      },
+    },
+  );
+
+  return {
+    useGetAllUsers,
+    banUserMutation: useBanUserMutation,
+    unbanUserMutation: useUnbanUserMutation,
+  };
 };
