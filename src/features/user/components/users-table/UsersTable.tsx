@@ -126,7 +126,7 @@ export const UsersTable: React.FC<UsersTableProps> = ({
 
       <Modal
         title="Create a warning for user"
-        visible={!!selectedUserId && showWarningForm}
+        open={!!selectedUserId && showWarningForm}
         onCancel={() => {
           setSelectedUserId(null);
           setShowWarningForm(false);
@@ -163,7 +163,7 @@ export const UsersTable: React.FC<UsersTableProps> = ({
 
       <Modal
         title="User Warnings"
-        visible={!!selectedUserId && !showWarningForm}
+        open={!!selectedUserId && !showWarningForm}
         onCancel={() => {
           setSelectedUserId(null);
         }}
