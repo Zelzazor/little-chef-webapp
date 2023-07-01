@@ -171,7 +171,7 @@ export const UsersTable: React.FC<UsersTableProps> = ({
           setSelectedUserId(null);
         }}
       >
-        <UserWarnings userId={selectedUserId} />
+        <UserWarnings userId={selectedUserId ?? ''} />
       </Modal>
 
       <div className="w-full flex my-4">
