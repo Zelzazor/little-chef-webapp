@@ -1,4 +1,4 @@
-// useUsers.ts
+// hooks/useUsers.ts
 
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useAxios } from '../../utility/hooks/useAxios';
@@ -40,9 +40,36 @@ export const useUsers = () => {
     },
   );
 
+  const useGetUserWarningsPaginated = (
+    userId: string,
+    params: BasePaginationQueryDto,
+  ) => {
+    return useQuery(
+      ['userWarnings', `warnings-${userId}-${params.page}-${params.pageSize}`],
+      async () => {
+        const response = await axios.get(`/user/${userId}/warnings`, {
+          params,
+        });
+        return response.data;
+      },
+    );
+  };
+
+  const useCreateWarningMutation = useMutation(
+    (warning: { userId: string; description: string }) =>
+      axios.post(`/user/${warning.userId}/warnings`, warning),
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries('userWarnings');
+      },
+    },
+  );
+
   return {
     useGetAllUsers,
+    useGetUserWarningsPaginated,
     banUserMutation: useBanUserMutation,
     unbanUserMutation: useUnbanUserMutation,
+    createWarningMutation: useCreateWarningMutation,
   };
 };
