@@ -16,8 +16,8 @@ export const Users: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Users</h1>
+    <div className="mx-6">
+      <h1 className="text-3xl font-bold mb-4">Users</h1>
       <UsersTable
         users={data?.data || []}
         pagination={data?.pagination}
