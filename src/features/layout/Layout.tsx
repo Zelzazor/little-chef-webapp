@@ -4,11 +4,12 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PieChartOutlined,
+  QuestionCircleOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { Dropdown, Layout, Menu, MenuProps } from 'antd';
 import { useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { LogoutButtonAnchor } from '../auth/components/LogoutButtonAnchor';
 import { useUserContext } from '../user/context/UserContext';
 
@@ -28,7 +29,8 @@ export const AppLayout = () => {
     },
     {
       key: '2',
-      label: 'Settings',
+      label: 'Guide',
+      onClick: () => navigate('/guide'),
     },
     {
       key: '3',
@@ -116,6 +118,14 @@ export const AppLayout = () => {
         <Content className="p-3 h-full overflow-y-auto" id="content">
           <Outlet />
         </Content>
+        {location.pathname !== '/guide' && (
+          <Link
+            to="/guide"
+            className="fixed z-90 bottom-10 right-8 bg-red-600 w-20 h-20 rounded-full drop-shadow-lg flex justify-center items-center text-white text-4xl hover:bg-red-700 hover:text-white hover:drop-shadow-2xl text-"
+          >
+            <QuestionCircleOutlined />
+          </Link>
+        )}
       </Layout>
     </Layout>
   );
